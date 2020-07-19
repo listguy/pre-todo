@@ -3,10 +3,14 @@
     padding: 0;
 }
 
+body{
+    background-color: honeydew;
+}
+
 #mainTitle{
-    text-align: center;
     margin-top: 10px;
     margin-bottom: 30px;
+    padding-left: 70px;
 }
 
 #gridDiv{
@@ -16,23 +20,55 @@
                          "controls view view"
                          ". view view";
     gap: 10px;
+    column-gap: 30px;
     width: 60%;
+    
+    padding: 30px;
 }
 
 #ControlSection{
     grid-area: controls;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
     padding-left: 20px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-areas: "head head head"
+                         "desc textIn textIn"
+                         "prio prio prioSel"
+                         "add . ." ;
+    align-items: center;
+    justify-content: start;
+    gap: 10px;
+    height: 200px;
+    box-shadow: 2px 2px rgb(238, 131, 131);
+    padding: 10px;
+    border: solid 0.5px rgb(238, 131, 131);
     
 
+}
+
+#newTaskTitle{
+    grid-area: head;
+}
+
+#textInputLabel{
+    grid-area: desc;
+}
+
+#textInput{
+    grid-area: textIn;
+}
+
+#priorityLabel{
+    grid-area: prio;
+}
+
+#prioritySelector{
+    grid-area: prioSel;
 }
 
 #ViewSection{
     grid-area: view;
     min-height: 200px;
-    border: solid 0.5px black;
 }
 
 #searchDiv{
@@ -42,7 +78,7 @@
 #sortDiv{
     grid-area: sort;
     display:flex;
-    justify-content: flex-end;
+    justify-content: space-around;
 }
 
 #newTaskTitle{
@@ -68,14 +104,19 @@ span[color = 'taskPriority5']{
 .todoPriority{
     margin-left: auto;
     margin-right: 20px;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-radius: 50%;
 }
 
 .todoContainer{
     display: flex;
     align-items: center;
-    margin-top:5px;
-    margin-bottom: 5px;
-
+    border: solid 0.2px rgb(153, 175, 120);
+    border-radius: 5%;
+    margin: 5px;
+    padding: 4px;
+    box-shadow: 1px 2px rgb(92, 98, 82);
 }
 
 .taskCheck{
