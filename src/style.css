@@ -117,6 +117,9 @@ span[color="taskPriority5"] {
   padding: 4px;
   box-shadow: 1px 2px rgb(92, 98, 82);
   justify-content: flex-end;
+
+  cursor: move;
+  user-select: none;
 }
 
 .taskCheck {

@@ -100,22 +100,33 @@ function sortList() {
   }
 }
 
-// function searchTask(event){
-//     let search = event.target.value;
-//     if(search === ''){
-//         return;
-//     }
-//     let searchKey = `(${search})+`;
-//     searchKey = new RegExp (searchKey, 'ig');
-//     let list = document.querySelector('#ViewSection');
-//     let listItems = list.querySelectorAll('div');
-//     for(let i = 0; i < listItems.length ; i++){
-//         let task = listItems[i].querySelector('span');
-//         let repTask = task.innerHTML.replace(searchKey, `<span class='highlight>${search}</span>`);
-//         task.innerHTML = repTask;
-        
-//     }
-// }
+//function that search the pattern in the search ox in all tasks
+function searchTask(event){
+    let search = event.target.value;
+    // removing current searches if search input is empty
+    if(search === ''){
+        let list1 = document.querySelector('#ViewSection');
+        let listItems1 = list1.querySelectorAll('div');
+        for(let i = 0; i < listItems1.length ; i++){
+            let task1 = listItems1[i].querySelector('span');
+            task1.innerHTML = task1.innerText;
+        }
+        return;
+    }
+    // highlighting and reorganizing according to search
+    let searchKey = `(${search})+`;
+    searchKey = new RegExp (searchKey, 'ig');
+    let list = document.querySelector('#ViewSection');
+    let listItems = list.querySelectorAll('div');
+    for(let i = 0; i < listItems.length ; i++){
+        let task = listItems[i].querySelector('span');
+        let repTask = task.innerText.replace(searchKey, `<span class='highlight'>${search}</span>`);
+        task.innerHTML = repTask;
+        if(list[0] !== listItems[i] && searchKey.test(task.innerText)){
+        list.insertBefore(listItems[i], list.firstChild);
+        }
+    }
+}
 
 // tasks counter deceleration
 let taskCounter = 0;
@@ -128,8 +139,10 @@ addTaskButton.addEventListener("click", AddTask);
 let tasksList = document.querySelector("#ViewSection");
 tasksList.addEventListener("change", taskCheck);
 
+//add event listener to sort the list
 let sortButton = document.querySelector("#sortButton");
 sortButton.addEventListener("click", sortList);
 
-// let searchBar = document.querySelector('#searchInput');
-// searchBar.addEventListener('input', searchTask);
+//add event listener to type in search box
+let searchBar = document.querySelector('#searchInput');
+searchBar.addEventListener('input', searchTask);
