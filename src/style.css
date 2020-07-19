@@ -1,133 +1,159 @@
-*{
-    margin: 0;
-    padding: 0;
+* {
+  margin: 0;
+  padding: 0;
 }
 
-body{
-    background-color: honeydew;
+body {
+  background-color: honeydew;
 }
 
-#mainTitle{
-    margin-top: 10px;
-    margin-bottom: 30px;
-    padding-left: 70px;
+#mainTitle {
+  margin-top: 10px;
+  margin-bottom: 30px;
+  padding-left: 70px;
 }
 
-#gridDiv{
-    display: grid;
-    grid-template-columns: 1.5fr 2fr 1fr;
-    grid-template-areas: "controls search sort"
-                         "controls view view"
-                         ". view view";
-    gap: 10px;
-    column-gap: 30px;
-    width: 60%;
-    
-    padding: 30px;
+#gridDiv {
+  display: grid;
+  grid-template-columns: 1.5fr 2fr 1fr;
+  grid-template-areas:
+    "controls search sort"
+    "controls view view"
+    ". view view";
+  gap: 10px;
+  column-gap: 30px;
+  width: 60%;
+
+  padding: 30px;
 }
 
-#ControlSection{
-    grid-area: controls;
-    padding-left: 20px;
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-areas: "head head head"
-                         "desc textIn textIn"
-                         "prio prio prioSel"
-                         "add . ." ;
-    align-items: center;
-    justify-content: start;
-    gap: 10px;
-    height: 200px;
-    box-shadow: 2px 2px rgb(238, 131, 131);
-    padding: 10px;
-    border: solid 0.5px rgb(238, 131, 131);
-    
-
+#ControlSection {
+  grid-area: controls;
+  padding-left: 20px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-areas:
+    "head head head"
+    "desc textIn textIn"
+    "prio prio prioSel"
+    "add alert alert";
+  align-items: center;
+  justify-content: start;
+  gap: 10px;
+  height: 200px;
+  box-shadow: 2px 2px rgb(238, 131, 131);
+  padding: 10px;
+  border: solid 0.5px rgb(238, 131, 131);
 }
 
-#newTaskTitle{
-    grid-area: head;
+#newTaskTitle {
+  grid-area: head;
+  text-align: left;
 }
 
-#textInputLabel{
-    grid-area: desc;
+#textInputLabel {
+  grid-area: desc;
 }
 
-#textInput{
-    grid-area: textIn;
+#textInput {
+  grid-area: textIn;
 }
 
-#priorityLabel{
-    grid-area: prio;
+#priorityLabel {
+  grid-area: prio;
 }
 
-#prioritySelector{
-    grid-area: prioSel;
+#prioritySelector {
+  grid-area: prioSel;
 }
 
-#ViewSection{
-    grid-area: view;
-    min-height: 200px;
+#ViewSection {
+  grid-area: view;
+  min-height: 200px;
 }
 
-#searchDiv{
-    grid-area: search;
+#searchDiv {
+  grid-area: search;
 }
 
-#sortDiv{
-    grid-area: sort;
-    display:flex;
-    justify-content: space-around;
+#sortDiv {
+  grid-area: sort;
+  display: flex;
+  justify-content: space-around;
 }
 
-#newTaskTitle{
-    text-align: center;
+span[color="taskPriority1"] {
+  background-color: #77c2fe;
+}
+span[color="taskPriority2"] {
+  background-color: #4bff2f;
+}
+span[color="taskPriority3"] {
+  background-color: #fefe31;
+}
+span[color="taskPriority4"] {
+  background-color: #feb331;
+}
+span[color="taskPriority5"] {
+  background-color: #fc2020;
 }
 
-span[color = 'taskPriority1']{
-    background-color: #77C2FE;
-}
-span[color = 'taskPriority2']{
-    background-color: #4BFF2F;
-}
-span[color = 'taskPriority3']{
-    background-color: #FEFE31;
-}
-span[color = 'taskPriority4']{
-    background-color: #FEB331;
-}
-span[color = 'taskPriority5']{
-    background-color: #FC2020;
+.todoPriority {
+  margin-right: 20px;
+  margin-left: 30px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  padding-left: 10px;
+  padding-right: 10px;
+  border-radius: 20%;
 }
 
-.todoPriority{
-    margin-left: auto;
-    margin-right: 20px;
-    padding-left: 10px;
-    padding-right: 10px;
-    border-radius: 50%;
+.todoContainer {
+  display: flex;
+  align-items: center;
+  border: solid 0.2px rgb(153, 175, 120);
+  border-radius: 5%;
+  margin: 5px;
+  padding: 4px;
+  box-shadow: 1px 2px rgb(92, 98, 82);
+  justify-content: flex-end;
 }
 
-.todoContainer{
-    display: flex;
-    align-items: center;
-    border: solid 0.2px rgb(153, 175, 120);
-    border-radius: 5%;
-    margin: 5px;
-    padding: 4px;
-    box-shadow: 1px 2px rgb(92, 98, 82);
+.taskCheck {
+  margin-left: 10px;
 }
 
-.taskCheck{
-    margin-left: 10px;
+.todoText {
+  margin-left: 5px;
+  margin-right: auto;
 }
 
-.todoText{
-    margin-left:5px;
+.todoCreatedAt {
+  margin-left: 30px;
+  color: darkgray;
 }
 
-.taskTime{
-    margin-left: 30px;
-    color: darkgray;
+#addButton {
+  background-color: #37af65;
+  height: 30px;
+  color: white;
+  border-width: 0px;
+}
+
+#addButton:hover {
+  transform: scale(1.1);
+}
+
+#alertDiv {
+  grid-area: alert;
+}
+
+#alert {
+  color: red;
+  font-size: 15px;
+  margin-left: 20px;
+}
+
+.highlight{
+    background-color: yellow;
 }
