@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1 id="mainTitle">To-Do List</h1>
+
+    <!-- control section -->
+    <section id="ControlSection">
+      <div id="searchDiv">
+        <input type="text" id="searchInput" placeholder="Search..." />
+        <button id="searchButton">Go</button>
+      </div>
+
+      <div id="addTaskDiv">
+        <!-- all controllers to add new tasks-->
+
+        <label for="textInput" id="newTaskLabel">Add New Task:</label>
+        <input type="text" id="textInput" placeholder="add task..." />
+
+        <label id="priorityLabel" for="prioritySelector"
+          >Select Priority:</label
+        >
+        <select id="prioritySelector">
+          <option value="" disabled selected>-!-</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+        </select>
+
+        <button id="addButton">Add Task</button>
+      </div>
+    </section>
+
+    <!-- view section -->
+    <section id="ViewSection"></section>
+  </body>
+</html>
