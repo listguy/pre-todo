@@ -81,9 +81,14 @@ function AddTask() {
 //function that removes checked items
 function taskCheck(event) {
   if (event.target.checked) {
-    let fatherDiv = event.target.closest("div").remove();
+    let fatherDiv = event.target.closest("div");
     taskCounter--;
     document.querySelector("#counter").innerText = `${taskCounter}`;
+
+    //inserting element to completed tasks section
+    let compList = document.querySelector('#completedTasks');
+    compList.appendChild(fatherDiv);
+    fatherDiv.querySelector('.todoCreatedAt').hidden = true;
   }
 }
 
@@ -101,31 +106,34 @@ function sortList() {
 }
 
 //function that search the pattern in the search ox in all tasks
-function searchTask(event){
-    let search = event.target.value;
-    // removing current searches if search input is empty
-    if(search === ''){
-        let list1 = document.querySelector('#ViewSection');
-        let listItems1 = list1.querySelectorAll('div');
-        for(let i = 0; i < listItems1.length ; i++){
-            let task1 = listItems1[i].querySelector('span');
-            task1.innerHTML = task1.innerText;
-        }
-        return;
+function searchTask(event) {
+  let search = event.target.value;
+  // removing current searches if search input is empty
+  if (search === "") {
+    let list1 = document.querySelector("#ViewSection");
+    let listItems1 = list1.querySelectorAll("div");
+    for (let i = 0; i < listItems1.length; i++) {
+      let task1 = listItems1[i].querySelector("span");
+      task1.innerHTML = task1.innerText;
     }
-    // highlighting and reorganizing according to search
-    let searchKey = `(${search})+`;
-    searchKey = new RegExp (searchKey, 'ig');
-    let list = document.querySelector('#ViewSection');
-    let listItems = list.querySelectorAll('div');
-    for(let i = 0; i < listItems.length ; i++){
-        let task = listItems[i].querySelector('span');
-        let repTask = task.innerText.replace(searchKey, `<span class='highlight'>${search}</span>`);
-        task.innerHTML = repTask;
-        if(list[0] !== listItems[i] && searchKey.test(task.innerText)){
-        list.insertBefore(listItems[i], list.firstChild);
-        }
+    return;
+  }
+  // highlighting and reorganizing according to search
+  let searchKey = `(${search})+`;
+  searchKey = new RegExp(searchKey, "ig");
+  let list = document.querySelector("#ViewSection");
+  let listItems = list.querySelectorAll("div");
+  for (let i = 0; i < listItems.length; i++) {
+    let task = listItems[i].querySelector("span");
+    let repTask = task.innerText.replace(
+      searchKey,
+      `<span class='highlight'>${search}</span>`
+    );
+    task.innerHTML = repTask;
+    if (list[0] !== listItems[i] && searchKey.test(task.innerText)) {
+      list.insertBefore(listItems[i], list.firstChild);
     }
+  }
 }
 
 // tasks counter deceleration
@@ -144,5 +152,5 @@ let sortButton = document.querySelector("#sortButton");
 sortButton.addEventListener("click", sortList);
 
 //add event listener to type in search box
-let searchBar = document.querySelector('#searchInput');
-searchBar.addEventListener('input', searchTask);
+let searchBar = document.querySelector("#searchInput");
+searchBar.addEventListener("input", searchTask);

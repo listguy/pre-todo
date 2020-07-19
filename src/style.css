@@ -15,14 +15,14 @@ body {
 
 #gridDiv {
   display: grid;
-  grid-template-columns: 1.5fr 2fr 1fr;
+  grid-template-columns: 1.5fr 3fr 1fr 2fr;
   grid-template-areas:
-    "controls search sort"
-    "controls view view"
-    ". view view";
+    "controls search sort completed"
+    "controls view view completed"
+    ". view view completed" ;
   gap: 10px;
   column-gap: 30px;
-  width: 60%;
+  width: 90%;
 
   padding: 30px;
 }
@@ -74,6 +74,7 @@ body {
 
 #searchDiv {
   grid-area: search;
+  display: flex;
 }
 
 #sortDiv {
@@ -117,9 +118,13 @@ span[color="taskPriority5"] {
   padding: 4px;
   box-shadow: 1px 2px rgb(92, 98, 82);
   justify-content: flex-end;
+}
 
-  cursor: move;
-  user-select: none;
+#completedTasks{
+    grid-area: completed;
+    border: solid 0.5px black;
+    min-width: 100px;
+    padding: 10px;
 }
 
 .taskCheck {
@@ -157,6 +162,10 @@ span[color="taskPriority5"] {
   margin-left: 20px;
 }
 
-.highlight{
-    background-color: yellow;
+.highlight {
+  background-color: yellow;
+}
+
+#searchInput{
+   margin-left: auto; 
 }
