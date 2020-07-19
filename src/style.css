@@ -3,31 +3,90 @@
     padding: 0;
 }
 
+#mainTitle{
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 30px;
+}
+
 #gridDiv{
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1.5fr 2fr 1fr;
     grid-template-areas: "controls search sort"
                          "controls view view"
-                         "controls view view";
+                         ". view view";
     gap: 10px;
+    width: 60%;
 }
 
 #ControlSection{
     grid-area: controls;
     display: flex;
     flex-direction: column;
-    justify-content: start;
+    justify-content: space-around;
+    padding-left: 20px;
+    
+
 }
 
 #ViewSection{
     grid-area: view;
     min-height: 200px;
+    border: solid 0.5px black;
 }
 
 #searchDiv{
     grid-area: search;
 }
 
-#sortButton{
+#sortDiv{
     grid-area: sort;
+    display:flex;
+    justify-content: flex-end;
+}
+
+#newTaskTitle{
+    text-align: center;
+}
+
+span[color = 'taskPriority1']{
+    background-color: #77C2FE;
+}
+span[color = 'taskPriority2']{
+    background-color: #4BFF2F;
+}
+span[color = 'taskPriority3']{
+    background-color: #FEFE31;
+}
+span[color = 'taskPriority4']{
+    background-color: #FEB331;
+}
+span[color = 'taskPriority5']{
+    background-color: #FC2020;
+}
+
+.todoPriority{
+    margin-left: auto;
+    margin-right: 20px;
+}
+
+.todoContainer{
+    display: flex;
+    align-items: center;
+    margin-top:5px;
+    margin-bottom: 5px;
+
+}
+
+.taskCheck{
+    margin-left: 10px;
+}
+
+.todoText{
+    margin-left:5px;
+}
+
+.taskTime{
+    margin-left: 30px;
+    color: darkgray;
 }
