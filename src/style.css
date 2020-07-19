@@ -1,0 +1,33 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+#gridDiv{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-areas: "controls search sort"
+                         "controls view view"
+                         "controls view view";
+    gap: 10px;
+}
+
+#ControlSection{
+    grid-area: controls;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+}
+
+#ViewSection{
+    grid-area: view;
+    min-height: 200px;
+}
+
+#searchDiv{
+    grid-area: search;
+}
+
+#sortButton{
+    grid-area: sort;
+}
