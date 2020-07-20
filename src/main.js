@@ -11,17 +11,44 @@ function timeString() {
 }
 
 
-// function createTooltip(){
-//     let tooltip = document.createElement('div');
-//     tooltip.className = 'tooltip';
-//     for(let i = 1; i<=5; i++){
-//         let span = document.createElement('span');
-//         span.className = `prio${i}`;
-//         span.innerText = i;
-//         tooltip.appendChild(span);
-//     }
-//     return tooltip;
-// }
+function createTooltip(){
+    let tooltip = document.createElement('span');
+    tooltip.className = 'tooltip';
+    for(let i = 1; i<=5; i++){
+        let button = document.createElement('button');
+        button.className = `prio${i}`;
+        button.innerText = i;
+        button.addEventListener('click', changePriority);
+        tooltip.appendChild(button);
+    }
+    
+    return tooltip;
+}
+
+
+function changePriority(event){
+    if(event.target.closest('section').id === 'completedSection'){
+        return;
+    }
+    let priority = event.target.closest('span').parentElement; //todoPriority element
+    let Task = priority.closest('div'); // todoContainer element 
+    let tasks = localStorage.getItem('tasks'); // tasks local storage
+    tasks = tasks.replace(Task.outerHTML, '--$special_identifier$--'); //replace Task with unique symbol
+
+    //create new priority element
+    let taskPriority = document.createElement("span");
+    taskPriority.innerText = event.target.innerText;
+    taskPriority.className = `todoPriority`;
+    taskPriority.setAttribute("color", `taskPriority${event.target.innerText}`);
+    taskPriority.appendChild(createTooltip());
+
+
+    Task.replaceChild(taskPriority , priority);
+    debugger;
+    tasks = tasks.replace('--$special_identifier$--', Task.outerHTML);
+    
+    localStorage.setItem('tasks', tasks);
+}
 
 
 
@@ -53,10 +80,7 @@ function CreateNewTask(task, prio) {
   taskPriority.innerText = prio;
   taskPriority.className = `todoPriority`;
   taskPriority.setAttribute("color", `taskPriority${prio}`);
-
-//   taskPriority.addEventListener('click', function(){
-//       taskPriority.appendChild(createTooltip());
-//   })
+  taskPriority.appendChild(createTooltip());
 
 
 
@@ -303,8 +327,13 @@ function removeFromLocalStorage(base, task){
 function loadFromLocalStorage(base, father){
     let local = localStorage.getItem(base);
     father.innerText = ''
-    if(local !== null){
+    if(local !== null){ 
         father.innerHTML += local;
+        let prio = document.querySelectorAll('.todoPriority');
+        for (let i = 0; i < prio.length; i++) {
+            prio[i].addEventListener('click', changePriority);
+            
+        }
     }
     if(father.id === 'completedTasks' && local !== null && local !== ''){
         father.querySelector('.taskCheck').setAttribute('checked', true);
@@ -339,6 +368,10 @@ let placeholder;
 let isDraggingStarted = false;
 
 const mouseDownHandler = function(e) {
+
+    if(e.target.parentElement.className === 'tooltip'){
+        return;
+    }
 
     if(e.target.className === 'taskCheck'){
         return;
