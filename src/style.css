@@ -4,27 +4,47 @@
 }
 
 body {
-  background-color: honeydew;
+  background-color: rgb(118, 151, 122);
+  font-family: 'Amatic SC';
+  font-size: 20px;
 }
 
 #mainTitle {
-  margin-top: 10px;
-  margin-bottom: 30px;
+  margin-top: 30px;
   padding-left: 70px;
+  color: white;
+  text-shadow: rgb(118, 151, 122);
+  text-align: center;
+  padding-right: 150px;
+  font-family: 'Permanent Marker', cursive;
+  font-size: 40px;
 }
+
+h4{
+    font-family: 'Permanent Marker', cursive;
+}
+
+
 
 #gridDiv {
   display: grid;
-  grid-template-columns: 1.5fr 3fr 1fr 2fr;
+  grid-template-columns: 1.5fr 1fr 2fr 1fr 2fr;
+  grid-template-rows: 47px 1fr 30px;
   grid-template-areas:
-    "controls search sort completed"
-    "controls view view completed"
-    ". view view completed" ;
+    "controls sort title search completed"
+    "controls view view view completed"
+    "clean view view view completed" ;
   gap: 10px;
   column-gap: 30px;
   width: 90%;
 
   padding: 30px;
+}
+#taskTitle{
+    font-family: 'Permanent Marker', cursive;
+    grid-area: title;
+    text-align: center;
+    font-size: 25px;
 }
 
 #ControlSection {
@@ -41,9 +61,11 @@ body {
   justify-content: start;
   gap: 10px;
   height: 200px;
-  box-shadow: 2px 2px rgb(238, 131, 131);
+  box-shadow: 2px 2px black;
   padding: 10px;
-  border: solid 0.5px rgb(238, 131, 131);
+  border: solid 0.5px black;
+  background-color: honeydew;
+  border-radius: 2%;
 }
 
 #newTaskTitle {
@@ -69,18 +91,57 @@ body {
 
 #ViewSection {
   grid-area: view;
-  min-height: 200px;
+  min-height: 350px;
+  background-color: honeydew;
+  box-shadow: 2px 2px black;
+  border: solid 0.5px black;
+  border-radius: 2%;
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
 
 #searchDiv {
   grid-area: search;
   display: flex;
+  /* background-color: honeydew;
+  box-shadow: 2px 2px black;
+  border: solid 0.5px black;
+  border-radius: 2%; */
+  padding: 10px;
+  max-height: 25px;
+  align-items: flex-start;
 }
 
 #sortDiv {
   grid-area: sort;
   display: flex;
-  justify-content: space-around;
+  align-items: center;
+  background-color: honeydew;
+  box-shadow: 2px 2px black;
+  border: solid 0.5px black;
+  border-radius: 2%;
+  padding: 10px;
+  max-height: 25px;
+  align-items: flex-start;
+}
+
+#sortButton{
+    margin-left: auto;
+    margin-right: 5px;
+    background-color: #37af65;
+    height: 25px;
+    color: white;
+    border-width: 0px;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+#sortButton:hover{
+    transform: scale(1.1);
+}
+
+#counter{
+    margin-right: 5px;
 }
 
 span[color="taskPriority1"] {
@@ -120,14 +181,20 @@ span[color="taskPriority5"] {
   justify-content: flex-end;
   font-family: 'Amatic SC';
   font-size: 20px;
+
+  /* cursor: move;
+  user-select: none; */
 }
 
 #completedSection{
     grid-area: completed;
+    background-color: honeydew;
+    box-shadow: 2px 2px black;
     border: solid 0.5px black;
+    border-radius: 2%;
     min-width: 100px;
     padding: 10px;
-}
+    }
 
 .taskCheck {
   margin-left: 10px;
@@ -141,6 +208,7 @@ span[color="taskPriority5"] {
 .todoCreatedAt {
   margin-left: 30px;
   color: darkgray;
+  font-size: 18px;
 }
 
 #addButton {
@@ -169,7 +237,8 @@ span[color="taskPriority5"] {
 }
 
 #searchInput{
-   margin-left: auto; 
+   margin-left: auto;
+   height: 25px;
 }
 
 #completeHead{
@@ -179,4 +248,59 @@ span[color="taskPriority5"] {
 
 #cleanCompleted{
     margin-left: auto;
+    background-color: #be0101;
+    height: 25px;
+    color: white;
+    border-width: 0px;
+    padding-left: 5px;
+    padding-right: 5px;
+    margin-top: 2px;
+    
+}
+
+#cleanCompleted:hover{
+    transform: scale(1.1);
+}
+
+#clear{
+    grid-area: clean;
+    background-color: #be0101;
+    height: 25px;
+    color: white;
+    border-width: 0px;
+    padding-left: 5px;
+    padding-right: 5px;
+
+}
+
+#clear:hover{
+    transform: scale(1.1);
+}
+
+.fadeIn{
+    animation: slide-up 0.2s ease;
+}
+@keyframes slide-up {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.fadeOut{
+    animation: slide-up 0.2s ease;
+}
+@keyframes slide-up {
+    0% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
 }

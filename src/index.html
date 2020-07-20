@@ -5,13 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="style.css" />
     <link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap" rel="stylesheet">
+
     <title>Document</title>
   </head>
   <body>
     <h1 id="mainTitle">To-Do List</h1>
     <div id="gridDiv">
+      <h3 id='taskTitle'>Tasks:</h3>
       <div id="searchDiv">
-        <h2>Tasks:</h2>
         <input
           type="text"
           id="searchInput"
@@ -22,7 +24,7 @@
       <div id="sortDiv">
         <label id="counter">0</label>
         <label>Tasks</label>
-        <button id="sortButton">Sort Tasks</button>
+        <button id="sortButton">Sort</button>
       </div>
       <!-- control section -->
       <section id="ControlSection">
@@ -57,12 +59,12 @@
       <section id='completedSection'>
         <div id='completeHead'>
           <h4>Completed Tasks:</h4>
-          <button id='cleanCompleted'>Clean</button>
+          <button id='cleanCompleted'>Clear</button>
         </div>
         <div id='completedTasks'></div>
       </section>
+      <button id='clear'>clear local storage</button>
     </div>
-    <button id='clear'>clear</button>
     <script src="main.js"></script>
   </body>
 </html>

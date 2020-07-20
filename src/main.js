@@ -1,3 +1,4 @@
+
 //function that create a string containing the current date and time
 function timeString() {
   let time = new Date();
@@ -8,6 +9,9 @@ function timeString() {
   }:${time.getSeconds() > 10 ? time.getSeconds() : `0${time.getSeconds()}`}`;
   return createTime;
 }
+
+
+
 
 //function that gets task description and priority, and create new task div
 function CreateNewTask(task, prio) {
@@ -49,8 +53,13 @@ function CreateNewTask(task, prio) {
   
   addToLocalStorage('tasks', newTask);
 
+//   newTask.addEventListener('mousedown', mouseDownHandler);
+
   return newTask;
 }
+
+
+
  
 //function making sure input is full
 function taskValidation(task, prio) {
@@ -67,6 +76,10 @@ function taskValidation(task, prio) {
   return true;
 }
 
+
+
+
+
 //function to add new task to the view section
 function AddTask() {
   let viewSection = document.querySelector("#ViewSection");
@@ -81,6 +94,9 @@ function AddTask() {
     taskDescription.focus();
   }
 }
+
+
+
 
 //function that removes checked items
 function taskCheck(event) {
@@ -105,6 +121,10 @@ function taskCheck(event) {
   }
 }
 
+
+
+
+
 //function hat sorts the list
 function sortList() {
   let list = document.querySelector("#ViewSection");
@@ -117,6 +137,10 @@ function sortList() {
     });
   }
 }
+
+
+
+
 
 //function that search the pattern in the search ox in all tasks
 function searchTask(event) {
@@ -134,7 +158,7 @@ function searchTask(event) {
   // highlighting and reorganizing according to search
   let searchKey = `(${search})+`;
   searchKey = new RegExp(searchKey, "ig");
-  let list = document.querySelector("#ViewTasks");
+  let list = document.querySelector("#ViewSection");
   let listItems = list.querySelectorAll("div");
   for (let i = 0; i < listItems.length; i++) {
     let task = listItems[i].querySelector("span");
@@ -148,6 +172,10 @@ function searchTask(event) {
     }
   }
 }
+
+
+
+
 
 // function that return unchecked tasks from complete section
 function returnTask(event){
@@ -170,6 +198,10 @@ function returnTask(event){
     }
 }
 
+
+
+
+
 //function hat cleans completed tasks section
 function cleanCompleted(){
     let completedTasks = document.querySelector('#completedTasks')
@@ -182,6 +214,11 @@ function cleanCompleted(){
     localStorage.setItem('completedTasks', compTasks);
     
 }
+
+
+
+
+
 
 //local storage deceleration
 let localStorage = window.localStorage;
@@ -216,8 +253,7 @@ cleanButton.addEventListener('click', cleanCompleted);
 
 
 
-// local storage control functions
-
+// local storage control function
 function addToLocalStorage(target, task){
     let local = localStorage.getItem(target);
     if(local === null){
@@ -232,11 +268,6 @@ function removeFromLocalStorage(base, task){
     local = local.replace(task.outerHTML, '');
     localStorage.setItem(base, local);
 }
-
-// function moveLocalStorage(base, target, task){
-//     addToLocalStorage(target, task);
-//     removeFromLocalStorage(base, task);
-// }
 
 function loadFromLocalStorage(base, father){
     let local = localStorage.getItem(base);
@@ -259,7 +290,134 @@ clearButton.addEventListener('click', function(){
         localStorage.clear();
 });
 
+
+
+
 loadFromLocalStorage('tasks', tasksList);
 loadFromLocalStorage('completedTasks', completedTasks);
 
     
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// // The current dragging item
+// let draggingEle;
+
+// // The current position of mouse relative to the dragging element
+// let x = 0;
+// let y = 0;
+
+// let placeholder;
+// let isDraggingStarted = false;
+
+// const mouseDownHandler = function(e) {
+//     draggingEle = e.target.closest('div');
+    
+//     // Calculate the mouse position
+//     const rect = draggingEle.getBoundingClientRect();
+//     x = e.pageX - rect.left;
+//     y = e.pageY - rect.top;
+
+//     // Attach the listeners to `document`
+//     tasksList.addEventListener('mousemove', mouseMoveHandler);
+//     tasksList.addEventListener('mouseup', mouseUpHandler);
+// };
+
+// const mouseMoveHandler = function(e) {
+//     if(x > )
+//     // Set position for dragging element
+//     draggingEle.style.position = 'absolute';
+//     draggingEle.style.top = `${e.pageY - y}px`; 
+//     draggingEle.style.left = `${e.pageX - x}px`;
+//     draggingEle.style.width = '600px';
+    
+//     const draggingRect = draggingEle.getBoundingClientRect();
+
+
+//     if (!isDraggingStarted) {
+//         // Update the flag
+//         isDraggingStarted = true;
+        
+//         // Let the placeholder take the height of dragging element
+//         // So the next element won't move up
+//         placeholder = document.createElement('div');
+//         placeholder.classList.add('placeholder');
+//         draggingEle.parentNode.insertBefore(
+//             placeholder,
+//             draggingEle.nextSibling
+//         );
+
+//         // Set the placeholder's height
+//         placeholder.style.height = `${draggingRect.height}px`;
+//     }
+
+//     const prevEle = draggingEle.previousElementSibling;
+//     const nextEle = placeholder.nextElementSibling;   
+    
+//     if (prevEle && isAbove(draggingEle, prevEle)) {
+//         // The current order    -> The new order
+//         // prevEle              -> placeholder
+//         // draggingEle          -> draggingEle
+//         // placeholder          -> prevEle
+//         swap(placeholder, draggingEle);
+//         swap(placeholder, prevEle);
+//         return;
+//     }
+
+//     if (nextEle && isAbove(nextEle, draggingEle)) {
+//         // The current order    -> The new order
+//         // draggingEle          -> nextEle
+//         // placeholder          -> placeholder
+//         // nextEle              -> draggingEle
+//         swap(nextEle, placeholder);
+//         swap(nextEle, draggingEle);
+//     }
+// };
+
+// const mouseUpHandler = function() {
+//     // Remove the position styles
+//     draggingEle.style.removeProperty('top');
+//     draggingEle.style.removeProperty('left');
+//     draggingEle.style.removeProperty('position');
+//     draggingEle.style.removeProperty('width');
+
+//     // Remove the placeholder
+//     placeholder && placeholder.parentNode.removeChild(placeholder);
+//     // Reset the flag
+//     isDraggingStarted = false;
+
+
+//     x = null;
+//     y = null;
+//     draggingEle = null;
+
+//     // Remove the handlers of `mousemove` and `mouseup`
+//     document.removeEventListener('mousemove', mouseMoveHandler);
+//     document.removeEventListener('mouseup', mouseUpHandler);
+// };
+
+// const list = document.getElementById('ViewSection');
+
+// // Query all items
+// [].slice.call(list.querySelectorAll('.todoContainer')).forEach(function(item) {
+//     item.addEventListener('mousedown', mouseDownHandler);
+// });
+
+
+// const isAbove = function(nodeA, nodeB) {
+//     // Get the bounding rectangle of nodes
+//     const rectA = nodeA.getBoundingClientRect();
+//     const rectB = nodeB.getBoundingClientRect();
+
+//     return (rectA.top + rectA.height / 2 < rectB.top + rectB.height / 2);
+// };
+
+// const swap = function(nodeA, nodeB) {
+//     const parentA = nodeA.parentNode;
+//     const siblingA = nodeA.nextSibling === nodeB ? nodeA : nodeA.nextSibling;
+
+//     // Move `nodeA` to before the `nodeB`
+//     nodeB.parentNode.insertBefore(nodeA, nodeB);
+
+//     // Move `nodeB` to before the sibling of `nodeA`
+//     parentA.insertBefore(nodeB, siblingA);
+// };
