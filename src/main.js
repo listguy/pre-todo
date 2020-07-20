@@ -11,6 +11,19 @@ function timeString() {
 }
 
 
+// function createTooltip(){
+//     let tooltip = document.createElement('div');
+//     tooltip.className = 'tooltip';
+//     for(let i = 1; i<=5; i++){
+//         let span = document.createElement('span');
+//         span.className = `prio${i}`;
+//         span.innerText = i;
+//         tooltip.appendChild(span);
+//     }
+//     return tooltip;
+// }
+
+
 
 
 //function that gets task description and priority, and create new task div
@@ -28,6 +41,7 @@ function CreateNewTask(task, prio) {
   let todo = document.createElement("span");
   todo.innerText = task;
   todo.className = "todoText";
+  
 
   //creating Date span containing task creation time
   let taskTime = document.createElement("span");
@@ -39,6 +53,12 @@ function CreateNewTask(task, prio) {
   taskPriority.innerText = prio;
   taskPriority.className = `todoPriority`;
   taskPriority.setAttribute("color", `taskPriority${prio}`);
+
+//   taskPriority.addEventListener('click', function(){
+//       taskPriority.appendChild(createTooltip());
+//   })
+
+
 
   //increasing tasks counter
   taskCounter++;
@@ -53,7 +73,7 @@ function CreateNewTask(task, prio) {
   
   addToLocalStorage('tasks', newTask);
 
-//   newTask.addEventListener('mousedown', mouseDownHandler);
+  newTask.addEventListener('mousedown', mouseDownHandler);
 
   return newTask;
 }
@@ -147,11 +167,11 @@ function searchTask(event) {
   let search = event.target.value;
   // removing current searches if search input is empty
   if (search === "") {
-    let list1 = document.querySelector("#ViewSection");
-    let listItems1 = list1.querySelectorAll("div");
-    for (let i = 0; i < listItems1.length; i++) {
-      let task1 = listItems1[i].querySelector("span");
-      task1.innerHTML = task1.innerText;
+    let list = document.querySelector("#ViewSection");
+    let listItems = list.querySelectorAll("div");
+    for (let i = 0; i < listItems.length; i++) {
+      let task = listItems[i].querySelector("span");
+      task.innerHTML = task.innerText;
     }
     return;
   }
@@ -223,11 +243,9 @@ function cleanCompleted(){
 //local storage deceleration
 let localStorage = window.localStorage;
 
-
 // tasks counter deceleration
 let taskCounter = (localStorage.getItem('counter'))? localStorage.getItem('counter') : 0;
 document.querySelector("#counter").innerText = `${taskCounter}`;
-
 
 // add event listener to add new task
 let addTaskButton = document.querySelector("#addButton");
@@ -245,11 +263,24 @@ sortButton.addEventListener("click", sortList);
 let searchBar = document.querySelector("#searchInput");
 searchBar.addEventListener("input", searchTask);
 
+//add event listener to search bar
 let completedTasks = document.querySelector('#completedTasks');
 completedTasks.addEventListener('change', returnTask); 
 
+//add event listener to clean completed tasks
 let cleanButton = document.querySelector('#cleanCompleted');
 cleanButton.addEventListener('click', cleanCompleted);
+
+// add event listener to clear local storage
+let clearButton = document.querySelector('#clear');
+clearButton.addEventListener('click', function(){
+        localStorage.clear();
+        tasksList.innerHTML = '';
+        completedTasks.innerHTML = '';
+        taskCounter  = 0;
+        document.querySelector("#counter").innerText = `${taskCounter}`;
+});
+
 
 
 
@@ -285,139 +316,148 @@ function loadFromLocalStorage(base, father){
 
 
 
-let clearButton = document.querySelector('#clear');
-clearButton.addEventListener('click', function(){
-        localStorage.clear();
-});
 
 
 
 
+
+// load data from local storage
 loadFromLocalStorage('tasks', tasksList);
 loadFromLocalStorage('completedTasks', completedTasks);
 
     
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-// // The current dragging item
-// let draggingEle;
+// The current dragging item
+let draggingEle;
 
-// // The current position of mouse relative to the dragging element
-// let x = 0;
-// let y = 0;
+// The current position of mouse relative to the dragging element
+let x = 0;
+let y = 0;
 
-// let placeholder;
-// let isDraggingStarted = false;
+let placeholder;
+let isDraggingStarted = false;
 
-// const mouseDownHandler = function(e) {
-//     draggingEle = e.target.closest('div');
+const mouseDownHandler = function(e) {
+
+    if(e.target.className === 'taskCheck'){
+        return;
+    }
+    draggingEle = e.target.closest('div');
     
-//     // Calculate the mouse position
-//     const rect = draggingEle.getBoundingClientRect();
-//     x = e.pageX - rect.left;
-//     y = e.pageY - rect.top;
+    // Calculate the mouse position
+    const rect = draggingEle.getBoundingClientRect();
+    x = e.pageX - rect.left;
+    y = e.pageY - rect.top;
 
-//     // Attach the listeners to `document`
-//     tasksList.addEventListener('mousemove', mouseMoveHandler);
-//     tasksList.addEventListener('mouseup', mouseUpHandler);
-// };
+    // Attach the listeners to `document`
+    document.addEventListener('mousemove', mouseMoveHandler);
+    document.addEventListener('mouseup', mouseUpHandler);
+};
 
-// const mouseMoveHandler = function(e) {
-//     if(x > )
-//     // Set position for dragging element
-//     draggingEle.style.position = 'absolute';
-//     draggingEle.style.top = `${e.pageY - y}px`; 
-//     draggingEle.style.left = `${e.pageX - x}px`;
-//     draggingEle.style.width = '600px';
+const mouseMoveHandler = function(e) {
+    // Set position for dragging element
+    draggingEle.setAttribute('style', '');
+    draggingEle.style.position = 'absolute';
+    draggingEle.style.top = `${e.pageY - y}px`; 
+    draggingEle.style.left = `${e.pageX - x}px`;
+    draggingEle.style.width = '600px';
     
-//     const draggingRect = draggingEle.getBoundingClientRect();
+    const draggingRect = draggingEle.getBoundingClientRect();
 
 
-//     if (!isDraggingStarted) {
-//         // Update the flag
-//         isDraggingStarted = true;
+    if (!isDraggingStarted) {
+        // Update the flag
+        isDraggingStarted = true;
         
-//         // Let the placeholder take the height of dragging element
-//         // So the next element won't move up
-//         placeholder = document.createElement('div');
-//         placeholder.classList.add('placeholder');
-//         draggingEle.parentNode.insertBefore(
-//             placeholder,
-//             draggingEle.nextSibling
-//         );
+        // Let the placeholder take the height of dragging element
+        // So the next element won't move up
+        placeholder = document.createElement('div');
+        placeholder.classList.add('placeholder');
+        draggingEle.parentNode.insertBefore(
+            placeholder,
+            draggingEle.nextSibling
+        );
 
-//         // Set the placeholder's height
-//         placeholder.style.height = `${draggingRect.height}px`;
-//     }
+        // Set the placeholder's height
+        placeholder.style.height = `${draggingRect.height}px`;
+    }
 
-//     const prevEle = draggingEle.previousElementSibling;
-//     const nextEle = placeholder.nextElementSibling;   
+    const prevEle = draggingEle.previousElementSibling;
+    const nextEle = placeholder.nextElementSibling;   
     
-//     if (prevEle && isAbove(draggingEle, prevEle)) {
-//         // The current order    -> The new order
-//         // prevEle              -> placeholder
-//         // draggingEle          -> draggingEle
-//         // placeholder          -> prevEle
-//         swap(placeholder, draggingEle);
-//         swap(placeholder, prevEle);
-//         return;
-//     }
+    if (prevEle && isAbove(draggingEle, prevEle)) {
+        // The current order    -> The new order
+        // prevEle              -> placeholder
+        // draggingEle          -> draggingEle
+        // placeholder          -> prevEle
+        swap(placeholder, draggingEle);
+        swap(placeholder, prevEle);
+        return;
+    }
 
-//     if (nextEle && isAbove(nextEle, draggingEle)) {
-//         // The current order    -> The new order
-//         // draggingEle          -> nextEle
-//         // placeholder          -> placeholder
-//         // nextEle              -> draggingEle
-//         swap(nextEle, placeholder);
-//         swap(nextEle, draggingEle);
-//     }
-// };
+    if (nextEle && isAbove(nextEle, draggingEle)) {
+        // The current order    -> The new order
+        // draggingEle          -> nextEle
+        // placeholder          -> placeholder
+        // nextEle              -> draggingEle
+        swap(nextEle, placeholder);
+        swap(nextEle, draggingEle);
+    }
+};
 
-// const mouseUpHandler = function() {
-//     // Remove the position styles
-//     draggingEle.style.removeProperty('top');
-//     draggingEle.style.removeProperty('left');
-//     draggingEle.style.removeProperty('position');
-//     draggingEle.style.removeProperty('width');
+const mouseUpHandler = function() {
 
-//     // Remove the placeholder
-//     placeholder && placeholder.parentNode.removeChild(placeholder);
-//     // Reset the flag
-//     isDraggingStarted = false;
+    if(placeholder.parentNode !== null && placeholder !== null){
+     // Remove the placeholder
+     placeholder && placeholder.parentNode.removeChild(placeholder);
+    }
+     // Reset the flag
+     isDraggingStarted = false;
 
-
-//     x = null;
-//     y = null;
-//     draggingEle = null;
-
-//     // Remove the handlers of `mousemove` and `mouseup`
-//     document.removeEventListener('mousemove', mouseMoveHandler);
-//     document.removeEventListener('mouseup', mouseUpHandler);
-// };
-
-// const list = document.getElementById('ViewSection');
-
-// // Query all items
-// [].slice.call(list.querySelectorAll('.todoContainer')).forEach(function(item) {
-//     item.addEventListener('mousedown', mouseDownHandler);
-// });
+    // Remove the position styles
+    draggingEle.style.removeProperty('top');
+    draggingEle.style.removeProperty('left');
+    draggingEle.style.removeProperty('position');
+    draggingEle.style.removeProperty('width');
+    draggingEle.removeAttribute('style');
 
 
-// const isAbove = function(nodeA, nodeB) {
-//     // Get the bounding rectangle of nodes
-//     const rectA = nodeA.getBoundingClientRect();
-//     const rectB = nodeB.getBoundingClientRect();
+   
 
-//     return (rectA.top + rectA.height / 2 < rectB.top + rectB.height / 2);
-// };
 
-// const swap = function(nodeA, nodeB) {
-//     const parentA = nodeA.parentNode;
-//     const siblingA = nodeA.nextSibling === nodeB ? nodeA : nodeA.nextSibling;
+    x = null;
+    y = null;
+    draggingEle = null;
 
-//     // Move `nodeA` to before the `nodeB`
-//     nodeB.parentNode.insertBefore(nodeA, nodeB);
+    // Remove the handlers of `mousemove` and `mouseup`
+    document.removeEventListener('mousemove', mouseMoveHandler);
+    document.removeEventListener('mouseup', mouseUpHandler);
+};
 
-//     // Move `nodeB` to before the sibling of `nodeA`
-//     parentA.insertBefore(nodeB, siblingA);
-// };
+const list = document.getElementById('ViewSection');
+
+// Query all items
+[].slice.call(list.querySelectorAll('.todoContainer')).forEach(function(item) {
+    item.addEventListener('mousedown', mouseDownHandler);
+});
+
+
+const isAbove = function(nodeA, nodeB) {
+    // Get the bounding rectangle of nodes
+    const rectA = nodeA.getBoundingClientRect();
+    const rectB = nodeB.getBoundingClientRect();
+
+    return (rectA.top + rectA.height / 2 < rectB.top + rectB.height / 2);
+};
+
+const swap = function(nodeA, nodeB) {
+    const parentA = nodeA.parentNode;
+    const siblingA = nodeA.nextSibling === nodeB ? nodeA : nodeA.nextSibling;
+
+    // Move `nodeA` to before the `nodeB`
+    nodeB.parentNode.insertBefore(nodeA, nodeB);
+
+    // Move `nodeB` to before the sibling of `nodeA`
+    parentA.insertBefore(nodeB, siblingA);
+};

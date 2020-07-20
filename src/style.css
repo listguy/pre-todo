@@ -98,6 +98,8 @@ h4{
   border-radius: 2%;
   padding-top: 10px;
   padding-bottom: 10px;
+  overflow: auto;
+  max-height: 350px;
 }
 
 #searchDiv {
@@ -182,8 +184,8 @@ span[color="taskPriority5"] {
   font-family: 'Amatic SC';
   font-size: 20px;
 
-  /* cursor: move;
-  user-select: none; */
+  cursor: move;
+  user-select: none;
 }
 
 #completedSection{
@@ -194,6 +196,8 @@ span[color="taskPriority5"] {
     border-radius: 2%;
     min-width: 100px;
     padding: 10px;
+    overflow: auto;
+    max-height: 407px;
     }
 
 .taskCheck {
@@ -304,3 +308,9 @@ span[color="taskPriority5"] {
         transform: translateY(20px);
     }
 }
+
+.moveImg{
+    height: 20px;
+    width: 20px;
+}
+
