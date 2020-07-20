@@ -38,6 +38,7 @@ function CreateNewTask(task, prio) {
 
   //increasing tasks counter
   taskCounter++;
+  localStorage.setItem('counter', taskCounter);
   document.querySelector("#counter").innerText = `${taskCounter}`;
 
   //appending spans to task div
@@ -45,10 +46,13 @@ function CreateNewTask(task, prio) {
   newTask.appendChild(todo);
   newTask.appendChild(taskTime);
   newTask.appendChild(taskPriority);
+  
+  addToLocalStorage('tasks', newTask);
 
   return newTask;
 }
-
+ 
+//function making sure input is full
 function taskValidation(task, prio) {
   let Alert = document.querySelector("#alert");
   Alert.innerText = "";
@@ -83,12 +87,21 @@ function taskCheck(event) {
   if (event.target.checked) {
     let fatherDiv = event.target.closest("div");
     taskCounter--;
+    localStorage.setItem('counter', taskCounter);
     document.querySelector("#counter").innerText = `${taskCounter}`;
 
+    removeFromLocalStorage('tasks', fatherDiv);
+
+    fatherDiv.querySelector('.taskCheck').setAttribute('checked', true);
     //inserting element to completed tasks section
     let compList = document.querySelector('#completedTasks');
     compList.appendChild(fatherDiv);
     fatherDiv.querySelector('.todoCreatedAt').hidden = true;
+
+    addToLocalStorage('completedTasks', fatherDiv);
+
+   
+
   }
 }
 
@@ -121,7 +134,7 @@ function searchTask(event) {
   // highlighting and reorganizing according to search
   let searchKey = `(${search})+`;
   searchKey = new RegExp(searchKey, "ig");
-  let list = document.querySelector("#ViewSection");
+  let list = document.querySelector("#ViewTasks");
   let listItems = list.querySelectorAll("div");
   for (let i = 0; i < listItems.length; i++) {
     let task = listItems[i].querySelector("span");
@@ -136,8 +149,48 @@ function searchTask(event) {
   }
 }
 
+// function that return unchecked tasks from complete section
+function returnTask(event){
+    if(!event.target.checked){
+        let fatherDiv = event.target.closest('div');
+
+        removeFromLocalStorage('completedTasks', fatherDiv);
+
+        fatherDiv.querySelector('.taskCheck').removeAttribute('checked');
+        fatherDiv.querySelector('.todoCreatedAt').innerText = timeString(); // updating task time
+        fatherDiv.querySelector('.todoCreatedAt').hidden = false;
+        let tasksList = document.querySelector('#ViewSection');
+        tasksList.appendChild(fatherDiv);
+
+        addToLocalStorage('tasks', fatherDiv);
+
+        taskCounter++;
+        localStorage.setItem('counter', taskCounter);
+        document.querySelector("#counter").innerText = `${taskCounter}`;
+    }
+}
+
+//function hat cleans completed tasks section
+function cleanCompleted(){
+    let completedTasks = document.querySelector('#completedTasks')
+    let tasks = completedTasks.querySelectorAll('div');
+    for (let i =0; i< tasks.length; i++){
+        tasks[i].remove();
+    }
+    let compTasks = localStorage.getItem('completedTasks');
+    compTasks = '';
+    localStorage.setItem('completedTasks', compTasks);
+    
+}
+
+//local storage deceleration
+let localStorage = window.localStorage;
+
+
 // tasks counter deceleration
-let taskCounter = 0;
+let taskCounter = (localStorage.getItem('counter'))? localStorage.getItem('counter') : 0;
+document.querySelector("#counter").innerText = `${taskCounter}`;
+
 
 // add event listener to add new task
 let addTaskButton = document.querySelector("#addButton");
@@ -154,3 +207,59 @@ sortButton.addEventListener("click", sortList);
 //add event listener to type in search box
 let searchBar = document.querySelector("#searchInput");
 searchBar.addEventListener("input", searchTask);
+
+let completedTasks = document.querySelector('#completedTasks');
+completedTasks.addEventListener('change', returnTask); 
+
+let cleanButton = document.querySelector('#cleanCompleted');
+cleanButton.addEventListener('click', cleanCompleted);
+
+
+
+// local storage control functions
+
+function addToLocalStorage(target, task){
+    let local = localStorage.getItem(target);
+    if(local === null){
+        local = '';
+    }
+    local += task.outerHTML;
+    localStorage.setItem(target, local);
+}
+
+function removeFromLocalStorage(base, task){
+    let local = localStorage.getItem(base);
+    local = local.replace(task.outerHTML, '');
+    localStorage.setItem(base, local);
+}
+
+// function moveLocalStorage(base, target, task){
+//     addToLocalStorage(target, task);
+//     removeFromLocalStorage(base, task);
+// }
+
+function loadFromLocalStorage(base, father){
+    let local = localStorage.getItem(base);
+    father.innerText = ''
+    if(local !== null){
+        father.innerHTML += local;
+    }
+    if(father.id === 'completedTasks' && local !== null && local !== ''){
+        father.querySelector('.taskCheck').setAttribute('checked', true);
+    }
+    
+
+}
+
+
+
+
+let clearButton = document.querySelector('#clear');
+clearButton.addEventListener('click', function(){
+        localStorage.clear();
+});
+
+loadFromLocalStorage('tasks', tasksList);
+loadFromLocalStorage('completedTasks', completedTasks);
+
+    

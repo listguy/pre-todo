@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="style.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@700&display=swap" rel="stylesheet">
     <title>Document</title>
   </head>
   <body>
@@ -53,10 +54,15 @@
       <section id="ViewSection"></section>
 
       <!--completed tasks section-->
-      <section id='completedTasks'>
-        <h4>Completed Tasks:</h4>
+      <section id='completedSection'>
+        <div id='completeHead'>
+          <h4>Completed Tasks:</h4>
+          <button id='cleanCompleted'>Clean</button>
+        </div>
+        <div id='completedTasks'></div>
       </section>
     </div>
+    <button id='clear'>clear</button>
     <script src="main.js"></script>
   </body>
 </html>
