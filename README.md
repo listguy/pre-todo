@@ -129,13 +129,13 @@ $ npm run test
 
 
 
-this is the link for vercel site(uploaded latest version):
+this is the link for vercel:
 
  https://pre-todo-git-pre-course-final.ofirsimhi1612.vercel.app/
 
 
 
-this is the gif for the functionality:
+this is the gif showing all features:
 
  ![Add todo task](./readme-files/hs7u4JeigX.gif)
 
@@ -148,3 +148,9 @@ this is the gif for the functionality:
  and this is the gif from the test:
 
   ![Add todo task](./readme-files/ui-testing-recording.gif)
+
+
+
+  link to the video:
+
+  https://drive.google.com/file/d/11LHMWSghehVoZ3C0ZvX1RPaovBOeFUbQ/view?usp=sharing
