@@ -311,15 +311,15 @@ completedTasks.addEventListener('change', returnTask);
 let cleanButton = document.querySelector('#cleanCompleted');
 cleanButton.addEventListener('click', cleanCompleted);
 
-// add event listener to clear local storage
-let clearButton = document.querySelector('#clearStorage');
-clearButton.addEventListener('click', function(){
-        localStorage.clear();
-        tasksList.innerHTML = '';
-        completedTasks.innerHTML = '';
-        taskCounter  = 0;
-        document.querySelector("#counter").innerText = `${taskCounter}`;
-});
+// // add event listener to clear local storage
+// let clearButton = document.querySelector('#clearStorage');
+// clearButton.addEventListener('click', function(){
+//         localStorage.clear();
+//         tasksList.innerHTML = '';
+//         completedTasks.innerHTML = '';
+//         taskCounter  = 0;
+//         document.querySelector("#counter").innerText = `${taskCounter}`;
+// });
 
 
 

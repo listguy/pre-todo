@@ -268,7 +268,7 @@ span[color="taskPriority5"] {
     transform: scale(1.1);
 }
 
-#clearStorage{
+/* #clearStorage{
     background-color: #be0101;
     height: 25px;
     color: white;
@@ -276,22 +276,22 @@ span[color="taskPriority5"] {
     padding-left: 5px;
     padding-right: 5px;
 
-}
+} */
 
 #trashCan{
     height: 150px;
     width: 100px;
     margin-left: 50px;
-    margin-top: 20px;
+    margin-top: 70px;
 }
 
 #trashCan:hover{
     transform: scale(1.1);
 }
 
-#clearStorage:hover{
+/* #clearStorage:hover{
     transform: scale(1.1);
-}
+} */
 
 .fadeIn{
     animation: slide-up 0.2s ease;
