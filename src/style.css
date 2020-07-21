@@ -285,6 +285,10 @@ span[color="taskPriority5"] {
     margin-top: 20px;
 }
 
+#trashCan:hover{
+    transform: scale(1.1);
+}
+
 #clearStorage:hover{
     transform: scale(1.1);
 }

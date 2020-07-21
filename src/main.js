@@ -200,7 +200,7 @@ function searchTask(event) {
     return;
   }
   // highlighting and reorganizing according to search
-  let searchKey = `(${search})+`;
+  let searchKey = `(${search})`;
   searchKey = new RegExp(searchKey, "ig");
   let list = document.querySelector("#ViewSection");
   let listItems = list.querySelectorAll("div");
