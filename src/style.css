@@ -29,17 +29,23 @@ h4{
 #gridDiv {
   display: grid;
   grid-template-columns: 1.5fr 1fr 2fr 1fr 2fr;
-  grid-template-rows: 47px 1fr 30px;
+  grid-template-rows: 47px 1fr 200px;
   grid-template-areas:
     "controls sort title search completed"
     "controls view view view completed"
-    "clean view view view completed" ;
+    "delete view view view completed" ;
   gap: 10px;
   column-gap: 30px;
   width: 90%;
 
   padding: 30px;
 }
+
+#delete{
+    grid-area: delete;
+}
+
+
 #taskTitle{
     font-family: 'Permanent Marker', cursive;
     grid-area: title;
@@ -105,10 +111,6 @@ h4{
 #searchDiv {
   grid-area: search;
   display: flex;
-  /* background-color: honeydew;
-  box-shadow: 2px 2px black;
-  border: solid 0.5px black;
-  border-radius: 2%; */
   padding: 10px;
   max-height: 25px;
   align-items: flex-start;
@@ -266,8 +268,7 @@ span[color="taskPriority5"] {
     transform: scale(1.1);
 }
 
-#clear{
-    grid-area: clean;
+#clearStorage{
     background-color: #be0101;
     height: 25px;
     color: white;
@@ -277,7 +278,14 @@ span[color="taskPriority5"] {
 
 }
 
-#clear:hover{
+#trashCan{
+    height: 150px;
+    width: 100px;
+    margin-left: 50px;
+    margin-top: 20px;
+}
+
+#clearStorage:hover{
     transform: scale(1.1);
 }
 
@@ -309,7 +317,7 @@ span[color="taskPriority5"] {
     }
 }
 
-.moveImg{
+.delButton{
     height: 20px;
     width: 20px;
 }

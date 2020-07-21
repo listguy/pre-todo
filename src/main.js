@@ -259,6 +259,22 @@ function cleanCompleted(){
     
 }
 
+//function that delete an element
+function deleteElement(elem){
+    (elem.closest('section').id === 'ViewSection')?  delFromView(elem) : removeFromLocalStorage('completedTasks', elem);
+
+
+    function delFromView(elem){
+        //decreasing tasks counter
+        taskCounter--;
+        localStorage.setItem('counter', taskCounter);
+        document.querySelector("#counter").innerText = `${taskCounter}`;
+        removeFromLocalStorage('tasks', elem)
+    }
+
+    elem.remove();
+}
+
 
 
 
@@ -296,7 +312,7 @@ let cleanButton = document.querySelector('#cleanCompleted');
 cleanButton.addEventListener('click', cleanCompleted);
 
 // add event listener to clear local storage
-let clearButton = document.querySelector('#clear');
+let clearButton = document.querySelector('#clearStorage');
 clearButton.addEventListener('click', function(){
         localStorage.clear();
         tasksList.innerHTML = '';
@@ -394,7 +410,7 @@ const mouseMoveHandler = function(e) {
     draggingEle.style.position = 'absolute';
     draggingEle.style.top = `${e.pageY - y}px`; 
     draggingEle.style.left = `${e.pageX - x}px`;
-    draggingEle.style.width = '600px';
+    draggingEle.style.width = `${draggingEle.closest('section').getBoundingClientRect().width - 20}px` ;
     
     const draggingRect = draggingEle.getBoundingClientRect();
 
@@ -439,7 +455,7 @@ const mouseMoveHandler = function(e) {
     }
 };
 
-const mouseUpHandler = function() {
+const mouseUpHandler = function(event) {
 
     if(placeholder.parentNode !== null && placeholder !== null){
      // Remove the placeholder
@@ -455,7 +471,14 @@ const mouseUpHandler = function() {
     draggingEle.style.removeProperty('width');
     draggingEle.removeAttribute('style');
 
-
+    let garbage = document.querySelector('#trashCan').getBoundingClientRect();
+    var mousex = event.clientX;     // Get the horizontal coordinate
+    var mousey = event.clientY;     // Get the vertical coordinate
+    debugger;
+    if( garbage.x < mousex && mousex < garbage.right && garbage.y < mousey && mousey < garbage.bottom){
+        
+        deleteElement(draggingEle);
+    }
    
 
 
