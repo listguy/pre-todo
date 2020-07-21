@@ -138,3 +138,13 @@ this is the link for vercel site(uploaded latest version):
 this is the gif for the functionality:
 
  ![Add todo task](./readme-files/hs7u4JeigX.gif)
+
+
+
+
+
+
+
+ and this is the gif from the test:
+
+  ![Add todo task](./readme-files/ui-testing-recording.gif)
