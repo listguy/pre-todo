@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap"
+      rel="stylesheet"
+    />
+
+    <title>Document</title>
+  </head>
+  <body>
+    <h1 id="mainTitle">To-Do List</h1>
+    <div id="gridDiv">
+      <h3 id="taskTitle">Tasks:</h3>
+      <div id="searchDiv">
+        <input
+          type="text"
+          id="searchInput"
+          placeholder="Search..."
+          autocomplete="off"
+        />
+      </div>
+      <div id="sortDiv">
+        <label id="counter">0</label>
+        <label>Tasks</label>
+        <button id="sortButton">Sort</button>
+      </div>
+      <!-- control section -->
+      <section id="ControlSection">
+        <h4 id="newTaskTitle">Add New Task</h4>
+
+        <label for="textInput" id="textInputLabel">Description:</label>
+        <input type="text" id="textInput" placeholder="add task..." />
+
+        <label id="priorityLabel" for="prioritySelector">
+          Select Priority:</label
+        >
+        <select id="prioritySelector">
+          <option value="" disabled selected>-!-</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+        </select>
+
+        <button id="addButton">Add Task</button>
+
+        <div id="alertDiv">
+          <label id="alert"></label>
+        </div>
+      </section>
+
+      <!-- view section -->
+      <section id="ViewSection"></section>
+
+      <!--completed tasks section-->
+      <section id="completedSection">
+        <div id="completeHead">
+          <h4>Completed Tasks:</h4>
+          <button id="cleanCompleted">Clear</button>
+        </div>
+        <div id="completedTasks"></div>
+      </section>
+      <div id="delete">
+        <img id="trashCan" src="./trashCan.jpg" />
+      </div>
+    </div>
+    <script src="main.js"></script>
+  </body>
+</html>

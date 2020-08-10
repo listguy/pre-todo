@@ -115,3 +115,42 @@ $ npm run test
  - Add link to the PR you created in your private repo [here](https://docs.google.com/spreadsheets/d/1P9_YDGqIqmV10fvTmIXc_AGV0_ycI2aBFo2h5zprUMI/edit#gid=1903529310), fill the other details
 
  GOOD LUCK!
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+this is the link for vercel:
+
+ https://pre-todo-git-pre-course-final.ofirsimhi1612.vercel.app/
+
+
+
+this is the gif showing all features:
+
+ ![Add todo task](./readme-files/hs7u4JeigX.gif)
+
+
+
+
+
+
+
+ and this is the gif from the test:
+
+  ![Add todo task](./readme-files/ui-testing-recording.gif)
+
+
+
+  link to the video:
+
+  https://drive.google.com/file/d/11LHMWSghehVoZ3C0ZvX1RPaovBOeFUbQ/view?usp=sharing

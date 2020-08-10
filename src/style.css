@@ -1,0 +1,407 @@
+* {
+  margin: 0;
+  padding: 0;
+  
+}
+
+body {
+  background-color: rgb(118, 151, 122);
+  font-family: "Amatic SC";
+  font-size: 20px;
+  overflow: hidden;
+}
+
+#mainTitle {
+  margin-top: 30px;
+  padding-left: 70px;
+  color: white;
+  text-shadow: rgb(118, 151, 122);
+  text-align: center;
+  padding-right: 150px;
+  font-family: "Permanent Marker", cursive;
+  font-size: 40px;
+}
+
+h4 {
+  font-family: "Permanent Marker", cursive;
+}
+
+#gridDiv {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 2fr 1fr 2fr;
+  grid-template-rows: 47px 1fr 200px;
+  grid-template-areas:
+    "controls sort title search completed"
+    "controls view view view completed"
+    "delete view view view completed";
+  gap: 10px;
+  column-gap: 30px;
+  width: 90%;
+
+  padding: 30px;
+}
+
+#delete {
+  grid-area: delete;
+}
+
+#taskTitle {
+  font-family: "Permanent Marker", cursive;
+  grid-area: title;
+  text-align: center;
+  font-size: 25px;
+}
+
+#ControlSection {
+  grid-area: controls;
+  padding-left: 20px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-areas:
+    "head head head"
+    "desc textIn textIn"
+    "prio prio prioSel"
+    "add alert alert";
+  align-items: center;
+  justify-content: start;
+  gap: 10px;
+  height: 200px;
+  box-shadow: 2px 2px black;
+  padding: 10px;
+  border: solid 0.5px black;
+  background-color: honeydew;
+  border-radius: 2%;
+}
+
+#newTaskTitle {
+  grid-area: head;
+  text-align: left;
+}
+
+#textInputLabel {
+  grid-area: desc;
+}
+
+#textInput {
+  grid-area: textIn;
+}
+
+#priorityLabel {
+  grid-area: prio;
+}
+
+#prioritySelector {
+  grid-area: prioSel;
+}
+
+#ViewSection {
+  grid-area: view;
+  min-height: 350px;
+  background-color: honeydew;
+  box-shadow: 2px 2px black;
+  border: solid 0.5px black;
+  border-radius: 2%;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  overflow: auto;
+  max-height: 350px;
+}
+
+#searchDiv {
+  grid-area: search;
+  display: flex;
+  padding: 10px;
+  max-height: 25px;
+  align-items: flex-start;
+}
+
+#sortDiv {
+  grid-area: sort;
+  display: flex;
+  align-items: center;
+  background-color: honeydew;
+  box-shadow: 2px 2px black;
+  border: solid 0.5px black;
+  border-radius: 2%;
+  padding: 10px;
+  max-height: 25px;
+  align-items: flex-start;
+}
+
+#sortButton {
+  margin-left: auto;
+  margin-right: 5px;
+  background-color: #37af65;
+  height: 25px;
+  color: white;
+  border-width: 0px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#sortButton:hover {
+  transform: scale(1.1);
+}
+
+#counter {
+  margin-right: 5px;
+}
+
+span[color="taskPriority1"] {
+  background-color: #77c2fe;
+}
+span[color="taskPriority2"] {
+  background-color: #4bff2f;
+}
+span[color="taskPriority3"] {
+  background-color: #fefe31;
+}
+span[color="taskPriority4"] {
+  background-color: #feb331;
+}
+span[color="taskPriority5"] {
+  background-color: #fc2020;
+}
+
+.todoPriority {
+  margin-right: 20px;
+  margin-left: 30px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  padding-left: 10px;
+  padding-right: 10px;
+  border-radius: 20%;
+}
+
+.todoContainer {
+  display: flex;
+  align-items: center;
+  border: solid 0.2px rgb(153, 175, 120);
+  border-radius: 5%;
+  margin: 5px;
+  padding: 4px;
+  box-shadow: 1px 2px rgb(92, 98, 82);
+  justify-content: flex-end;
+  font-family: "Amatic SC";
+  font-size: 20px;
+
+  cursor: move;
+  user-select: none;
+}
+
+#completedSection {
+  grid-area: completed;
+  background-color: honeydew;
+  box-shadow: 2px 2px black;
+  border: solid 0.5px black;
+  border-radius: 2%;
+  min-width: 100px;
+  padding: 10px;
+  overflow: auto;
+  max-height: 407px;
+}
+
+.taskCheck {
+  margin-left: 10px;
+}
+
+.todoText {
+  margin-left: 5px;
+  margin-right: auto;
+}
+
+.todoCreatedAt {
+  margin-left: 30px;
+  color: darkgray;
+  font-size: 18px;
+}
+
+#addButton {
+  background-color: #37af65;
+  height: 30px;
+  color: white;
+  border-width: 0px;
+}
+
+#addButton:hover {
+  transform: scale(1.1);
+}
+
+#alertDiv {
+  grid-area: alert;
+}
+
+#alert {
+  color: red;
+  font-size: 15px;
+  margin-left: 20px;
+}
+
+.highlight {
+  background-color: yellow;
+}
+
+#searchInput {
+  margin-left: auto;
+  height: 25px;
+}
+
+#completeHead {
+  display: flex;
+  padding: 10px;
+}
+
+#cleanCompleted {
+  margin-left: auto;
+  background-color: #be0101;
+  height: 25px;
+  color: white;
+  border-width: 0px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin-top: 2px;
+}
+
+#cleanCompleted:hover {
+  transform: scale(1.1);
+}
+
+/* #clearStorage{
+    background-color: #be0101;
+    height: 25px;
+    color: white;
+    border-width: 0px;
+    padding-left: 5px;
+    padding-right: 5px;
+
+} */
+
+#trashCan {
+  height: 150px;
+  width: 100px;
+  margin-left: 50px;
+  margin-top: 70px;
+}
+
+#trashCan:hover {
+  transform: scale(1.1);
+}
+
+/* #clearStorage:hover{
+    transform: scale(1.1);
+} */
+
+.fadeIn {
+  animation: slide-up 0.2s ease;
+}
+@keyframes slide-up {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fadeOut {
+  animation: slide-up 0.2s ease;
+}
+@keyframes slide-up {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+}
+
+.delButton {
+  height: 20px;
+  width: 20px;
+}
+
+/* Tooltip container */
+.todoPriority {
+  position: relative;
+  display: inline-block;
+  border-bottom: 1px dotted black;
+}
+
+/* Tooltip text */
+.todoPriority .tooltip {
+  visibility: hidden;
+  width: 40px;
+  background-color: honeydew;
+  color: #fff;
+  text-align: center;
+  padding: 5px 0;
+  border-radius: 6px;
+  border: solid 0.3px black;
+
+  /* Position the tooltip text */
+  position: absolute;
+  z-index: 1;
+  bottom: -560%;
+  left: 340%;
+  margin-left: -100px;
+
+  /* Fade in tooltip */
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+/* Show the tooltip text when you mouse over the tooltip container */
+.todoPriority:hover .tooltip {
+  visibility: visible;
+  opacity: 1;
+}
+
+.prio1 {
+  height: 30px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  padding-left: 10px;
+  padding-right: 10px;
+  border-radius: 20%;
+  background-color: #77c2fe;
+}
+.prio2 {
+  height: 30px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  padding-left: 10px;
+  padding-right: 10px;
+  border-radius: 20%;
+  background-color: #4bff2f;
+}
+.prio3 {
+  height: 30px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  padding-left: 10px;
+  padding-right: 10px;
+  border-radius: 20%;
+  background-color: #fefe31;
+}
+.prio4 {
+  height: 30px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  padding-left: 10px;
+  padding-right: 10px;
+  border-radius: 20%;
+  background-color: #feb331;
+}
+.prio5 {
+  height: 30px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  padding-left: 10px;
+  padding-right: 10px;
+  border-radius: 20%;
+  background-color: #fc2020;
+}
