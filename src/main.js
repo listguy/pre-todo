@@ -215,10 +215,13 @@ function taskCheck(event) {
     taskCounter--;
     localStorage.setItem("counter", taskCounter);
     document.querySelector("#counter").innerText = `${taskCounter}`;
+    
+    fatherDiv.querySelector('.todoText').innerHTML = fatherDiv.querySelector('.todoText').innerText;
 
     removeFromLocalStorage("tasks", fatherDiv);
 
     fatherDiv.querySelector(".taskCheck").setAttribute("checked", true);
+    
     //inserting element to completed tasks section
     let compList = document.querySelector("#completedTasks");
     compList.appendChild(fatherDiv);
