@@ -49,7 +49,12 @@ function addToLocalStorage(target, task) {
 }
 
 function removeFromLocalStorage(base, task) {
+  // debugger;
   let local = localStorage.getItem(base);
+  //Trying to fix deleting searched items bug by removing the spans with highlighted class
+    let highlightSpans = task.querySelector("span");
+    highlightSpans.innerHTML = highlightSpans.innerText;
+  //
   local = local.replace(task.outerHTML, "");
   localStorage.setItem(base, local);
 }
@@ -126,7 +131,6 @@ function changePriority(event) {
   taskPriority.appendChild(createTooltip());
 
   Task.replaceChild(taskPriority, priority);
-  debugger;
   tasks = tasks.replace("--$special_identifier$--", Task.outerHTML);
 
   localStorage.setItem("tasks", tasks);
@@ -307,16 +311,19 @@ function cleanCompleted() {
 
 //function that delete an element
 function deleteElement(elem) {
+  // debugger
   elem.closest("section").id === "ViewSection"
     ? delFromView(elem)
     : removeFromLocalStorage("completedTasks", elem);
 
   function delFromView(elem) {
+    // debugger
     //decreasing tasks counter
     taskCounter--;
     localStorage.setItem("counter", taskCounter);
     document.querySelector("#counter").innerText = `${taskCounter}`;
     removeFromLocalStorage("tasks", elem);
+    
   }
 
   elem.remove();
