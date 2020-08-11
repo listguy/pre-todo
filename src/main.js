@@ -49,11 +49,10 @@ function addToLocalStorage(target, task) {
 }
 
 function removeFromLocalStorage(base, task) {
-  // debugger;
   let local = localStorage.getItem(base);
   //Trying to fix deleting searched items bug by removing the spans with highlighted class
-    let highlightSpans = task.querySelector("span");
-    highlightSpans.innerHTML = highlightSpans.innerText;
+  let highlightSpans = task.querySelector("span");
+  highlightSpans.innerHTML = highlightSpans.innerText;
   //
   local = local.replace(task.outerHTML, "");
   localStorage.setItem(base, local);
@@ -311,13 +310,11 @@ function cleanCompleted() {
 
 //function that delete an element
 function deleteElement(elem) {
-  // debugger
   elem.closest("section").id === "ViewSection"
     ? delFromView(elem)
     : removeFromLocalStorage("completedTasks", elem);
 
   function delFromView(elem) {
-    // debugger
     //decreasing tasks counter
     taskCounter--;
     localStorage.setItem("counter", taskCounter);
